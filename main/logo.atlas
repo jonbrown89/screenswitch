@@ -1,0 +1,9 @@
+images {
+  image: "/main/images/logo.png"
+}
+images {
+  image: "/main/images/wolf.png"
+}
+margin: 0
+extrude_borders: 0
+inner_padding: 0

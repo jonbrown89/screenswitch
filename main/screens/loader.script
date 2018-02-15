@@ -1,0 +1,49 @@
+local function load_main_menu(self)
+	msg.post("main:/screens#main_menu", "load")
+end
+
+local function unload_main_menu(self)
+	msg.post("main:/screens#main_menu", "unload")
+end
+
+local function load_splash(self)
+	msg.post("main:/screens#splash", "load")
+end
+
+local function unload_splash(self)
+	msg.post("main:/screens#splash", "unload")
+end
+
+local function load_game(self)
+	msg.post("main:/screens#game", "load")
+end
+
+local function unload_game(self)
+	msg.post("main:/screens#game", "unload")
+end
+
+function init(self)
+	msg.post(".", "acquire_input_focus")
+	load_splash(self)
+end
+
+function final(self)
+	msg.post(".", "release_input_focus")
+end
+
+function on_message(self, message_id, message, sender)
+	-- instead of assuming which screens are loaded / unloaded it would be better to load/unload based on flags
+    if message_id == hash("goto_main_menu") then
+    	unload_splash(self)
+    	load_main_menu(self)
+    elseif message_id == hash("goto_main_menu_via_game") then
+    	unload_game(self)
+    	load_main_menu(self)       	   
+    elseif message_id == hash("goto_game") then
+    	unload_main_menu(self)
+    	load_game(self)
+    elseif message_id == hash("proxy_loaded") then
+        msg.post(sender, "init")
+        msg.post(sender, "enable")
+    end 
+end

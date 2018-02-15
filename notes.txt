@@ -1,0 +1,23 @@
+**Having different screens, loading different screens, switching between screens.** 
+
+[This post references this thread.](https://forum.defold.com/t/level-switch-change-level/1064) As well as the official docs:
+
+http://www.defold.com/manuals/collection-proxies/
+
+Think of collections as a way to represent a screen. Main menu, game, splash ...
+
+Then you have a central script which loads or unloads collections as you switch screens. 
+
+If you would like you could add a super light weight inbetween screen which acts as loading screen - 
+or have unique light weight loading screens depending on what kind of activities you are going to, 
+and some screens you go to you may already know they are super light weight and don't need a loading screen inbetween.
+
+Remember that some screens you may want to not be screens you switch to but ones which act as overlays.
+
+1. The parent object's script of the collection proxies must ask for input if you want the child screens to be able to get input
+2. If you get the below error edit your .collection files in a text editor and change their name: from default 
+- the file name is NOT this name
+
+ERROR:GAMEOBJECT: The collection 'default' could not be created since there is already a socket with the same name.
+
+Remember that even in the different screens you may be loading / unloading proxy collections as you need them for that screen.
